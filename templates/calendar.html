@@ -1,0 +1,10 @@
+<ion-view view-title="Calendrier">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="calendar in calendars | reverse | unique: 'id'" type="item-text-wrap" href="#/app/calendars/{{calendar.id}}" >
+        <h2>{{calendar.jour}} {{calendar.dateTxt}}</h2>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
+<!-- ng-if="(calendar.date) <= (date | date:'dd.MM.yyyy')" -->
