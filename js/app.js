@@ -1,93 +1,149 @@
-// Ionic Starter App
+angular.module("assom", ["ionic","ionMdInput","ionic-material","ionic.rating","ionicLazyLoad","assom.controllers", "assom.services"])
+	.run(function($ionicPlatform) {
+		$ionicPlatform.ready(function() {
+			if(window.cordova && window.cordova.plugins.Keyboard) {
+				cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+				cordova.plugins.Keyboard.disableScroll(true);
+			}
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+			if(window.StatusBar) {
+				StatusBar.styleDefault();
+			}
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-      cordova.plugins.Keyboard.disableScroll(true);
+			setTimeout(function() {
+			}, 100);
 
-    }
-    if (window.StatusBar) {
-      // org.apache.cordova.statusbar required
-      StatusBar.styleDefault();
-    }
-  });
-})
+		});
+	})
 
-.filter('reverse', function() {
-  return function(items) {
-    return items.slice().reverse();
-  }
-})
 
-.filter('unique', function() {
-  return function(collection, keyname) {
-    var output = [], 
-        keys = [];
+	.filter("to_trusted", ["$sce", function($sce){
+		return function(text) {
+			return $sce.trustAsHtml(text);
+		};
+	}])
 
-    angular.forEach(collection, function(item) {
-        var key = item[keyname];
-        if(keys.indexOf(key) === -1) {
-            keys.push(key);
-            output.push(item);
-        }
-    });
 
-    return output;
-  };
-})
 
-.config(function($stateProvider, $urlRouterProvider) {
 
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
-  $stateProvider
+.config(function($stateProvider, $urlRouterProvider,$sceDelegateProvider) {
+	// Domain Whitelist
+	$sceDelegateProvider.resourceUrlWhitelist([
+		"self",
+		new RegExp('^(http[s]?):\/\/(w{3}.)?youtube\.com/.+$'),
+		new RegExp('^(http[s]?):\/\/(w{3}.)?w3schools\.com/.+$'),
+	]);
+	$stateProvider
+	.state("assom",{
+		url: "/assom",
+			abstract: true,
+			templateUrl: "templates/assom-side_menus.html",
+			controller: "side_menusCtrl",
+	})
 
-    .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/menu.html', 
-    controller: 'AppCtrl'
-  })
+	.state("assom.about", {
+		url: "/about",
+		views: {
+			"assom-side_menus" : {
+						templateUrl:"templates/assom-about.html",
+						controller: "aboutCtrl"
+					},
+			"fabButtonUp" : {
+						template: '',
+					},
+		}
+	})
 
-  .state('app.accueil', {
-    url: '/accueil',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/accueil.html',
-        controller: 'AccueilCtrl'
-      }
-    }
-  })
-  .state('app.assomRush', {
-      url: '/assomRush',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/calendar.html',
-          controller: 'CalendarDetailCtrl'
-        }
-      }
-    })
-  .state('app.assomRushs', {
-      url: '/assomRush/:calendarId',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/calendars.html',
-          controller: 'CalendarsCtrl'
-        }
-      }
-    });
-  // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/accueil');
+	.state("assom.accueil", {
+		url: "/accueil",
+		views: {
+			"assom-side_menus" : {
+						templateUrl:"templates/assom-accueil.html",
+						controller: "accueilCtrl"
+					},
+			"fabButtonUp" : {
+						template: '',
+					},
+		}
+	})
+
+	.state("assom.aprassom", {
+		url: "/aprassom",
+		views: {
+			"assom-side_menus" : {
+						templateUrl:"templates/assom-aprassom.html",
+						controller: "aprassomCtrl"
+					},
+			"fabButtonUp" : {
+						template: '',
+					},
+		}
+	})
+
+	.state("assom.assom_art_festival", {
+		url: "/assom_art_festival",
+		views: {
+			"assom-side_menus" : {
+						templateUrl:"templates/assom-assom_art_festival.html",
+						controller: "assom_art_festivalCtrl"
+					},
+			"fabButtonUp" : {
+						template: '',
+					},
+		}
+	})
+
+	.state("assom.assom_chef", {
+		url: "/assom_chef",
+		views: {
+			"assom-side_menus" : {
+						templateUrl:"templates/assom-assom_chef.html",
+						controller: "assom_chefCtrl"
+					},
+			"fabButtonUp" : {
+						template: '',
+					},
+		}
+	})
+
+	.state("assom.assom_rush", {
+		url: "/assom_rush",
+		views: {
+			"assom-side_menus" : {
+						templateUrl:"templates/assom-assom_rush.html",
+						controller: "assom_rushCtrl"
+					},
+			"fabButtonUp" : {
+						template: '',
+					},
+		}
+	})
+
+	.state("assom.assomiades", {
+		url: "/assomiades",
+		views: {
+			"assom-side_menus" : {
+						templateUrl:"templates/assom-assomiades.html",
+						controller: "assomiadesCtrl"
+					},
+			"fabButtonUp" : {
+						template: '',
+					},
+		}
+	})
+
+	.state("assom.soire_interasso", {
+		url: "/soire_interasso",
+		views: {
+			"assom-side_menus" : {
+						templateUrl:"templates/assom-soire_interasso.html",
+						controller: "soire_interassoCtrl"
+					},
+			"fabButtonUp" : {
+						template: '',
+					},
+		}
+	})
+
+	$urlRouterProvider.otherwise("/assom/accueil");
 });
