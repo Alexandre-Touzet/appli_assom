@@ -132,6 +132,19 @@ angular.module("assom", ["ionic","ionMdInput","ionic-material","ionic.rating","i
 		}
 	})
 
+	.state("assom.faq", {
+		url: "/faq",
+		views: {
+			"assom-side_menus" : {
+						templateUrl:"templates/assom-faq.html",
+						controller: "faqCtrl"
+					},
+			"fabButtonUp" : {
+						template: '',
+					},
+		}
+	})
+
 	.state("assom.soire_interasso", {
 		url: "/soire_interasso",
 		views: {
