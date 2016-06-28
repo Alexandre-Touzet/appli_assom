@@ -1,14 +1,17 @@
 	<ion-view view-title="Accueil" hide-nav-bar="false" >
-		<ion-content delegate-handle="top" lazy-scroll  id="page-accueil" class="page-accueil">
-		<div class="text-center"><img class="avatar relative" ng-src="data/images/orange2.png" />
-<p>AssoM V15</p>
+		<!-- content -->
+		<ion-content delegate-handle="top" lazy-scroll  id="page-accueil" class="has-header page-accueil">
+		<div style="text-align: center;"><br /><img src="data/images/images/assom-logo-forum-small.png" alt="" width="200" height="115" /><br /><br />Bienvenue &eacute;tudiant !<br /><br /></div>
+<div style="text-align: center;">Tu peux retrouver ci-dessous les prochains &eacute;v&egrave;nements &eacute;tudiants de ta ville !</div>
+<ion-list class="card list">
+<div class="item item-input"><i class="icon ion-search placeholder-icon"></i> <input type="search" ng-model="q" placeholder="Search" aria-label="filter evenements" /></div>
+</ion-list>
+<div class="list card animate-fade-slide-in-right"><a class="item item-icon-left" ng-repeat="item in evenements | filter:q as results" ng-init="$last ? fireEvent() : null" ng-href="#/assom/evenement_singles/{{item.id}}"> <i class="icon dark {{item.x_icon}}"></i> {{item.titlerendered}} </a></div>
+<ion-list class="list"> <ion-infinite-scroll ng-if="!noMoreItemsAvailable" on-infinite="onInfinite()" distance="5px"></ion-infinite-scroll> </ion-list> <ion-list class="list">
+<div class="item" ng-if="results.length == 0">
+<p>No results found...</p>
 </div>
-<div style="text-align: center;">Hey ! Bienvenue sur la version pr&eacute;liminaire de l'application de l'AssoM !&nbsp;</div>
-<br />
-<div class="list card"><a class="item item-icon-left" ng-click="openURL('https://www.facebook.com/AssoMEtudiants')"> <i class="positive icon ion-social-facebook"></i> On est bien !</a> <a class="item item-icon-left" ng-click="openURL('https://twitter.com/assom_officiel')"> <i class="calm icon ion-social-twitter"></i> Venez twitter ! </a></div>
-<br />
-<div class="text-center">
-<p>&copy; 2016 <a ng-click="openURL('http://assom.fr')">AssoM</a><br />Tous droits r&eacute;serv&eacute;s !</p>
-</div>
+</ion-list>
 		</ion-content>
+		<!-- ./content -->
 	</ion-view>

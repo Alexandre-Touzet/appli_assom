@@ -1,10 +1,35 @@
 	<ion-view view-title="FAQ" hide-nav-bar="false" >
-		<ion-content delegate-handle="top" lazy-scroll  id="page-faq" class=" page-faq">
-		<div class="card">
-  <div class="item item-text-wrap">
-    <p>It's Work<br/>faq page</p>
-  </div>
-</div>
+		<!-- content -->
+		<ion-content delegate-handle="top" lazy-scroll  id="page-faq" class="has-header page-faq">
+		
+			<ion-refresher pulling-text="Pull to refresh..."  on-refresh="doRefresh()"></ion-refresher>
+			<ion-list class="card list">
+				<div class="item item-input">
+					<i class="icon ion-search placeholder-icon"></i>
+					<input type="search" ng-model="q" placeholder="Search" aria-label="filter evenements" />
+				</div>
+			</ion-list>
+
+			<div class="list animate-fade-slide-in-right">
+					<div class="item"><h2>{{item.title.rendered}}</h2></div>
+					<div class="item item-thumbnail-left item-text-wrap">
+						<img class="full-image" image-lazy-loader="lines" image-lazy-src="{{item.x_featured_media}}"   />
+						<div ng-bind-html="item.excerpt.rendered"></div>
+				</div>
+					<a class="item button button-clear button-dark ink" href="">More</a>
+				</div>
+			</div>
+			<ion-list class="list">
+			<ion-infinite-scroll ng-if="!noMoreItemsAvailable" on-infinite="onInfinite()" distance="5px" ng-if="hasMoreData"></ion-infinite-scroll>
+			</ion-list>
+
+			<ion-list class="list">
+				<div class="item" ng-if="results.length == 0" >
+					<p>No results found...</p>
+				</div>
+			</ion-list>
+
 
 		</ion-content>
+		<!-- ./content -->
 	</ion-view>

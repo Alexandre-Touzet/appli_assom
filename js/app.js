@@ -22,6 +22,11 @@ angular.module("assom", ["ionic","ionMdInput","ionic-material","ionic.rating","i
 			return $sce.trustAsHtml(text);
 		};
 	}])
+	.filter("trustUrl", function($sce) {
+		return function(url) {
+			return $sce.trustAsResourceUrl(url);
+		};
+	})
 
 
 
@@ -56,13 +61,19 @@ angular.module("assom", ["ionic","ionMdInput","ionic-material","ionic.rating","i
 
 	.state("assom.accueil", {
 		url: "/accueil",
+		cache:false,
 		views: {
 			"assom-side_menus" : {
 						templateUrl:"templates/assom-accueil.html",
 						controller: "accueilCtrl"
 					},
 			"fabButtonUp" : {
-						template: '',
+						template: '<button id="fab-up-button" ng-click="scrollTop()" class="button button-fab button-fab-bottom-right button-energized-900 spin"><i class="icon ion-arrow-up-a"></i></button>',
+						controller: function ($timeout) {
+							$timeout(function () {
+								document.getElementById("fab-up-button").classList.toggle("on");
+							}, 900);
+						}
 					},
 		}
 	})
@@ -132,12 +143,46 @@ angular.module("assom", ["ionic","ionMdInput","ionic-material","ionic.rating","i
 		}
 	})
 
+	.state("assom.evenement_singles", {
+		url: "/evenement_singles/:id",
+		cache:false,
+		views: {
+			"assom-side_menus" : {
+						templateUrl:"templates/assom-evenement_singles.html",
+						controller: "evenement_singlesCtrl"
+					},
+			"fabButtonUp" : {
+						template: '',
+					},
+		}
+	})
+
 	.state("assom.faq", {
 		url: "/faq",
+		cache:false,
 		views: {
 			"assom-side_menus" : {
 						templateUrl:"templates/assom-faq.html",
 						controller: "faqCtrl"
+					},
+			"fabButtonUp" : {
+						template: '<button id="fab-up-button" ng-click="scrollTop()" class="button button-fab button-fab-bottom-right button-energized-900 spin"><i class="icon ion-arrow-up-a"></i></button>',
+						controller: function ($timeout) {
+							$timeout(function () {
+								document.getElementById("fab-up-button").classList.toggle("on");
+							}, 900);
+						}
+					},
+		}
+	})
+
+	.state("assom.post_singles", {
+		url: "/post_singles/:id",
+		cache:false,
+		views: {
+			"assom-side_menus" : {
+						templateUrl:"templates/assom-post_singles.html",
+						controller: "post_singlesCtrl"
 					},
 			"fabButtonUp" : {
 						template: '',

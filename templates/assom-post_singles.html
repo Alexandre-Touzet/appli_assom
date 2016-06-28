@@ -1,0 +1,26 @@
+	<ion-view view-title="{{ post.title.rendered }}" hide-nav-bar="false" >
+		<!-- content -->
+		<ion-content delegate-handle="top" lazy-scroll  id="page-post_singles" class="page-post_singles">
+		
+			<ion-refresher pulling-text="Pull to refresh..."  on-refresh="doRefresh()"></ion-refresher>
+			<div class="list card">
+					<div class="item">{{post.title.rendered}}</div>
+					<div class="item item-text-wrap noborder to_trusted" ng-bind-html="post.excerpt.rendered | to_trusted"></div>
+					<div class="item item-text-wrap noborder to_trusted" ng-bind-html="post.content.rendered | to_trusted"></div>
+					<div class="item noborder"><img class="full-image" image-lazy-loader="lines" image-lazy-src="{{post.x_featured_media}}"  /></div>
+					<div class="item">
+					<p>Share Link</p>
+					<div class="button-bar">
+						<button class="button button-small button-assertive icon ion-social-googleplus" ng-click="openURL('https://plus.google.com/share?url=' + post.link)"></button>
+						<button class="button button-small button-positive icon ion-social-facebook" ng-click="openURL('https://facebook.com/sharer/sharer.php?u=' + post.link)"></button>
+						<button class="button button-small button-calm icon ion-social-twitter" ng-click="openURL('https://twitter.com/share?url=' + post.link)"></button>
+						<button class="button button-small button-assertive-900 icon ion-social-pinterest" ng-click="openURL('https://pinterest.com/pin/create/bookmarklet/?&url=' + post.link)"></button>
+						<button class="button button-small button-positive-900 icon ion-social-linkedin" ng-click="openURL('https://www.linkedin.com/shareArticle?url=' + post.link)"></button>
+					</div>
+					</div>
+					<div class="item item-button"><a class="button button-dark ink-dark" ng-click="openURL(post.link)">Link</a></div>
+			</div>
+
+		</ion-content>
+		<!-- ./content -->
+	</ion-view>

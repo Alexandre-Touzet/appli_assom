@@ -1,0 +1,27 @@
+	<ion-view view-title="{{ evenement.titlerendered }}" hide-nav-bar="false" >
+		<!-- content -->
+		<ion-content delegate-handle="top" lazy-scroll  id="page-evenement_singles" class="page-evenement_singles">
+		
+			<ion-refresher pulling-text="Pull to refresh..."  on-refresh="doRefresh()"></ion-refresher>
+			<div class="list card">
+					<i class="icon {{evenement.x_icon}}"></i>
+					<div class="item">{{evenement.titlerendered}}</div>
+					<div class="item item-text-wrap noborder to_trusted" ng-bind-html="evenement.excerptrendered | to_trusted"></div>
+					<div class="item item-text-wrap noborder to_trusted" ng-bind-html="evenement.contentrendered | to_trusted"></div>
+					<div class="item noborder"><img class="full-image" image-lazy-loader="lines" image-lazy-src="{{evenement.x_featured_media}}"  /></div>
+					<div class="item">
+					<p>Partager</p>
+					<div class="button-bar">
+						<button class="button button-small button-assertive icon ion-social-googleplus" ng-click="openURL('https://plus.google.com/share?url=' + evenement.link)"></button>
+						<button class="button button-small button-positive icon ion-social-facebook" ng-click="openURL('https://facebook.com/sharer/sharer.php?u=' + evenement.link)"></button>
+						<button class="button button-small button-calm icon ion-social-twitter" ng-click="openURL('https://twitter.com/share?url=' + evenement.link)"></button>
+						<button class="button button-small button-assertive-900 icon ion-social-pinterest" ng-click="openURL('https://pinterest.com/pin/create/bookmarklet/?&url=' + evenement.link)"></button>
+						<button class="button button-small button-positive-900 icon ion-social-linkedin" ng-click="openURL('https://www.linkedin.com/shareArticle?url=' + evenement.link)"></button>
+					</div>
+					</div>
+					<div class="item item-button"><a class="button button-dark ink-dark" ng-click="openURL(evenement.link)">En savoir plus</a></div>
+			</div>
+
+		</ion-content>
+		<!-- ./content -->
+	</ion-view>
